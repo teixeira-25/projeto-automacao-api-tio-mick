@@ -8,22 +8,33 @@ import org.junit.Test;
 
 public class TokenTeste
 {
+
+    //Criando um objeto TokenEndpoint
+
     TokenEndpoint endpoint = new TokenEndpoint();
 
     @Test
     public void Teste02()
     {
+
+        //Criando um objeto Response usando o objeto do TokenEndpoint criado
+
         Response response = endpoint.request("root@local.dev", "root");
-//        System.out.println(response.statusCode());
-//        System.out.println(response.getBody().asString());
-//        Assert.assertEquals(202,response.statusCode());
+
+        //Transformando o payload da response em string
 
         String bodyString = response.body().asString();
+
+        //Manipulando essa String do Jason em um objeto
 
         JSONObject obj = new JSONObject(bodyString);
 
         String token = obj.getString("access_token");
         System.out.println(token);
+
+        //Validando se o status é o correto
+
+        Assert.assertEquals(202,response.statusCode());
 
     }
 }
